@@ -16,8 +16,11 @@ export class UserController {
   getUserById = (req: Request, res: Response) => {
     const { id } = req.params; // validate id params with any data validation library. e.g. Joi
 
-    if (!id) {
-      return res.status(400).json({ message: 'Id is required' });
+    // check if id is a number
+    if (isNaN(+id)) {
+      return res.status(400).json({
+        message: 'id must be a number',
+      });
     }
 
     this.userService
